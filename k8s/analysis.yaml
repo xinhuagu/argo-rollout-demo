@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+ name: rollout-check 
+spec:
+ metrics:
+ - name: webmetric
+   successCondition:  result == "UP" 
+   provider:
+     web:
+       url: "http://rollout-demo-stable.default.svc.cluster.local/q/health"
+       timeoutSeconds: 2
+       jsonPath: "{$.status}"

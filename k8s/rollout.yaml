@@ -13,7 +13,10 @@ spec:
     blueGreen:
       activeService: rollout-demo-stable
       previewService: rollout-demo-preview
-      autoPromotionEnabled: false
+      autoPromotionEnabled: true
+      prePromotionAnalysis:
+        templates:
+        - templateName: rollout-check
   template:
     metadata:
       creationTimestamp: null
@@ -21,7 +24,7 @@ spec:
         app: rollout-demo
     spec:
       containers:
-      - image: quarkus/rollout-demo:0.0.2
+      - image: quarkus/rollout-demo:0.0.1
         name: rollout-demo
         ports:
         - containerPort: 8080
