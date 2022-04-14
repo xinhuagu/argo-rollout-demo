@@ -14,7 +14,7 @@ spec:
           service:
             name: rollout-demo-stable
             port:
-              number: 8080
+              number: 80
         path: /
         pathType: Prefix
 status:
