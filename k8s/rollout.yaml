@@ -13,7 +13,7 @@ spec:
     blueGreen:
       activeService: rollout-demo-stable
       previewService: rollout-demo-preview
-      autoPromotionEnabled: true
+      autoPromotionEnabled: false
       prePromotionAnalysis:
         templates:
         - templateName: rollout-check
@@ -28,5 +28,10 @@ spec:
         name: rollout-demo
         ports:
         - containerPort: 8080
-        resources: {}
+        resources:
+          requests:
+            memory: 100Mi
+          limits:
+            memory: 100Mi
+            cpu: 50m
 status: {}
