@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: rollout-demo
+  name: rollout-demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rollout-demo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: rollout-demo
+    spec:
+      containers:
+      - image: quarkus/rollout-demo:0.0.1
+        name: rollout-demo
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}

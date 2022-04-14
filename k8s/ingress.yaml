@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  creationTimestamp: null
+  name: rollout-demo
+spec:
+  rules:
+  - host: rollout-demo.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: rollout-demo-stable
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer: {}
