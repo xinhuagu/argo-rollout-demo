@@ -1,0 +1,12 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: rollout-demo-hpa
+spec:
+ scaleTargetRef:
+   apiVersion: argoproj.io/v1alpha1
+   kind: Rollout
+   name: rollout-demo
+ minReplicas: 2
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 50
