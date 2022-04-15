@@ -24,7 +24,7 @@ spec:
         app: rollout-demo
     spec:
       containers:
-      - image: quarkus/rollout-demo:0.0.1
+      - image: quarkus/rollout-demo:0.0.2
         name: rollout-demo
         ports:
         - containerPort: 8080
