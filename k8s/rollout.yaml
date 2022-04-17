@@ -18,7 +18,7 @@ spec:
         - templateName: rollout-check
       trafficRouting:
         nginx:
-          stableIngress: rollouts-demo-stable
+          stableIngress: rollout-demo
       steps:
       - setWeight: 50
       - pause: {duration: 1m}
