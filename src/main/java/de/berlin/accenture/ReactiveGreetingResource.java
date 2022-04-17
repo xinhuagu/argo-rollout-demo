@@ -11,6 +11,6 @@ public class ReactiveGreetingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return "Hello CAE";
+        return "Hello Canary";
     }
 }

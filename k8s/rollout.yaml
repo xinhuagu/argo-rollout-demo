@@ -29,7 +29,7 @@ spec:
         app: rollout-demo
     spec:
       containers:
-      - image: xinhuagu/argo-rollout-demo:0.0.4
+      - image: xinhuagu/argo-rollout-demo:0.0.5
         name: rollout-demo
         ports:
         - containerPort: 8080
