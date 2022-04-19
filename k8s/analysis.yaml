@@ -9,5 +9,5 @@ spec:
    provider:
      web:
        url: "http://rollout-demo-preview.default.svc.cluster.local/q/health"
-       timeoutSeconds: 2
+       timeoutSeconds: 5
        jsonPath: "{$.status}"
