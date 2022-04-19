@@ -1,0 +1,114 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: github-
+spec:
+  entrypoint: all-steps
+  arguments:
+    parameters:
+    - name: repo
+      value: "https://github.com/xinhuagu/argo-rollout-demo.git"
+    - name: project
+      value: argo-rollout-demo
+    - name: tag 
+  volumes:
+  - name: workdir
+    persistentVolumeClaim:
+      claimName: local-persistence
+  - name: m2dir
+    persistentVolumeClaim:
+      claimName: m2-persistence
+  - name: kaniko-secret
+    persistentVolumeClaim:
+      claimName: kaniko-secret
+  templates:
+  - name: all-steps
+    steps:
+    - - name: pre-cleanup 
+        template: cleanup
+    - - name: clone-git-repo
+        template: git-clone 
+    - - name: build-project
+        template: build
+    - - name: push-image
+        template: image
+    - - name: cleanup
+        template: cleanup
+    - - name: argocd-sync
+        template: argocd-sync 
+  - name: git-clone
+    container:
+      volumeMounts:
+        - mountPath: /mnt/vol
+          name: workdir
+      image: alpine/git
+      workingDir: /mnt/vol
+      command: [git]
+      args:
+        - clone
+        - --depth
+        - "1"
+        - --branch
+        - "master"
+        - --single-branch
+        - "{{workflow.parameters.repo}}"
+  - name: build
+    container:
+      image: maven:3.8-openjdk-17-slim
+      volumeMounts:
+        - mountPath: /mnt/vol
+          name: workdir
+        - mountPath: /root/.m2
+          name: m2dir
+      workingDir: /mnt/vol/{{workflow.parameters.project}}
+      command: [mvn]
+      args:
+        - clean
+        - package
+  - name: image
+    container:
+      image: gcr.io/kaniko-project/executor:latest
+      volumeMounts:
+        - mountPath: /mnt/vol
+          name: workdir
+        - mountPath: /kaniko/.docker
+          name: kaniko-secret
+      workingDir: /mnt/vol/{{workflow.parameters.project}}
+      command: 
+        - /kaniko/executor
+      args:
+        - --dockerfile 
+        - src/main/docker/Dockerfile.jvm
+        - --context
+        - dir://.
+        - --destination
+        - xinhuagu/{{workflow.parameters.project}}:{{workflow.parameters.tag}}
+    volumes:
+      - name: kaniko-secret
+        projected:
+          sources:
+          - secret:
+              name: regcred
+              items:
+                - key: .dockerconfigjson
+                  path: config.json
+  - name: cleanup 
+    container:
+      image: alpine/git
+      volumeMounts:
+        - mountPath: /mnt/vol
+          name: workdir
+      workingDir: /mnt/vol
+      command: [rm]
+      args:
+        - -rf
+        - ./{{workflow.parameters.project}}
+  - name: argocd-sync
+    script:
+      image: argoproj/argocd
+      command: [bash]
+      source: |
+        #!/bin/bash
+        set -euo pipefail
+        argocd login argocd-server.argocd.svc.cluster.local --username=admin --password=Geheim123geheim --insecure 
+        argocd app sync {{workflow.parameters.project}}
