@@ -1,0 +1,49 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: dev
+  labels:
+    name: dev
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: m2-cache
+  namespace: dev
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  rollout-demo
+  namespace: dev
+spec:
+  selector:
+    matchLabels:
+      app:  rollout-demo
+  template:
+    metadata:
+      labels:
+        app:  rollout-demo
+    spec:
+      containers:
+        - name:  rollout-demo
+          image: rollout-demo
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http-web
+              containerPort: 8080
+            - name: jdwp-debug
+              containerPort: 5005
+          volumeMounts:
+            - mountPath: /root/.m2
+              name: m2-cache
+      volumes:
+        - name: m2-cache
+          persistentVolumeClaim:
+            claimName: m2-cache
