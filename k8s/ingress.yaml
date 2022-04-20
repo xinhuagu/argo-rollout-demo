@@ -20,24 +20,24 @@ spec:
 status:
   loadBalancer: {}
 ---
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   annotations:
-#     kubernetes.io/ingress.class: nginx
-#   creationTimestamp: null
-#   name: rollout-demo-preview
-# spec:
-#   rules:
-#   - host: rollout-demo-preview.local
-#     http:
-#       paths:
-#       - backend:
-#           service:
-#             name: rollout-demo-preview
-#             port:
-#               number: 80
-#         path: /
-#         pathType: Prefix
-# status:
-#   loadBalancer: {}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  creationTimestamp: null
+  name: rollout-demo-preview
+spec:
+  rules:
+  - host: rollout-demo-preview.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: rollout-demo-preview
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+status:
+  loadBalancer: {}

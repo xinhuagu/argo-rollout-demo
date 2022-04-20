@@ -8,6 +8,6 @@ spec:
    successCondition:  result == "UP" 
    provider:
      web:
-       url: "http://rollout-demo-stable.default.svc.cluster.local/q/health"
+       url: "http://rollout-demo-preview.default.svc.cluster.local/q/health"
        timeoutSeconds: 5
        jsonPath: "{$.status}"
