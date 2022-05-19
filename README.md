@@ -6,6 +6,7 @@ Tech Stack:
 - Kubernetes
 - Quarkus
 - Docker
+- Tilt.dev
 - Kaniko 
 - Argo Workflow
 - Argo CD
