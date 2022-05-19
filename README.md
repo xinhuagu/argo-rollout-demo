@@ -1,6 +1,6 @@
 # rollout-demo Project
 
-This project demostrate how to use Argo Workflow , Argo CD and Argo Rollout to create a complete Microservice CI/CD workflow with different Rollout Strategies (Cannary/Blue-Green) in a kubernetes Cluster. 
+This project demostrate how to use Argo Workflow , Argo CD and Argo Rollout to create a complete Microservice CI/CD workflow with different Rollout Strategies (Canary/Blue-Green) in a kubernetes Cluster. 
 
 Tech Stack:
 - Kubernetes
