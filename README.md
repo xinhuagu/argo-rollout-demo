@@ -10,6 +10,6 @@ Tech Stack:
 - Kaniko 
 - Argo Workflow
 - Argo CD
-- Argo Rolltou 
+- Argo Rollout
 
 ![Alt text](/img/rollout-demo-process.jpeg?raw=true "Argo Rollout DEMO")
