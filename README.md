@@ -13,3 +13,20 @@ Tech Stack:
 - Argo Rollout
 
 ![Alt text](/img/rollout-demo-process.jpeg?raw=true "Argo Rollout DEMO")
+
+
+## Argo rollout dashboard
+
+```
+kubectl argo rollouts dashboard
+```
+## Argo Workflow server
+
+```
+argo server --auth-mode=server
+```
+
+### ArgoCD 
+
+```
+kubectl port-forward svc/argocd-server -n argocd 8081:443
