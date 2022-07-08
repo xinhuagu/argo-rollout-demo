@@ -11,6 +11,6 @@ public class ReactiveGreetingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public String hello() {
-        return "Hello 0.0.16";
+        return "test 0.0.17";
     }
 }
