@@ -85,12 +85,27 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 ## login
 export ARGOCD_OPTS='--port-forward-namespace argocd'
 argocd login localhost:8081
-## update password
+## update password : Geheim123geheim
 argocd account update-password 
+````
+### Install Argo workflow
+````
+kubectl create ns argo
 
+kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/quick-start-postgres.yaml
+````
+install argo cli
+````
+brew install argo
+````
+start argo workflow ui
+````
+argo server --auth-mode=server
 ````
 
-### Install Ingress Controller
+### Config the App enviroment
+
+#### Install Ingress Controller
 ````
 helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
