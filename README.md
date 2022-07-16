@@ -19,6 +19,28 @@ Tech Stack:
 ## Local Kubernetes Cluster
 Using Rancher desktop or docker desktop to start a local cluster
 
+## Install metric server
+
+Download components.yaml 
+````
+https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+````
+Add one line "--kubelet-insecure-tls" in "- args" 
+````
+    spec:
+      containers:
+      - args:
+        - --cert-dir=/tmp
+        - --secure-port=4443
+        - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+        - --kubelet-use-node-status-port
+        - --metric-resolution=15s
+	      - --kubelet-insecure-tls
+````
+
+````
+kubectl apply -f components.yaml
+````
 ## Install Argo Rollout
 
 ```
