@@ -112,7 +112,7 @@ helm upgrade --install ingress-nginx ingress-nginx \
   --namespace ingress-nginx --create-namespace
 ````
 
-#### Create secreate for docker.io
+#### Create secret for docker.io
 ````
 DOCKER_USERNAME=<username>
 DOCKER_PASSWORD=<password>
@@ -121,5 +121,18 @@ kubectl create secret docker-registry regcred -n argo \
     --docker-server=${DOCKER_SERVER} \
     --docker-username=${DOCKER_USERNAME} \
     --docker-password=${DOCKER_PASSWORD}
+````
+
+#### create pvc for building process
+````
+kubectl apply -f ./development/kanikovolume.yaml
+kubectl apply -f ./development/local-persistence.yaml
+kubectl apply -f ./development/m2volume.yaml
+````
+
+# Buiding the project
+start the buiding process ( make sure the tag uses right version number)
+````
+argo submit ./deployment/github.yaml -n argo -p tag=0.0.18
 ````
 
