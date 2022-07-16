@@ -55,11 +55,7 @@ kubectl argo rollouts dashboard
 ```
 
 
-### Argo Workflow server
 
-```
-argo server --auth-mode=server
-```
 
 ### Install ArgoCD 
 ````
