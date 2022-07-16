@@ -111,3 +111,15 @@ helm upgrade --install ingress-nginx ingress-nginx \
   --repo https://kubernetes.github.io/ingress-nginx \
   --namespace ingress-nginx --create-namespace
 ````
+
+#### Create secreate for docker.io
+````
+DOCKER_USERNAME=<username>
+DOCKER_PASSWORD=<password>
+DOCKER_SERVER=https://index.docker.io/v1/
+kubectl create secret docker-registry regcred -n argo \
+    --docker-server=${DOCKER_SERVER} \
+    --docker-username=${DOCKER_USERNAME} \
+    --docker-password=${DOCKER_PASSWORD}
+````
+
