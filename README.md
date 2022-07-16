@@ -61,7 +61,38 @@ kubectl argo rollouts dashboard
 argo server --auth-mode=server
 ```
 
-### ArgoCD 
+### Install ArgoCD 
+````
+kubectl create namespace argocd
 
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+````
+install argocd cli
+````
+brew install argocd
+````
+
+
+Open argocd ui
 ```
 kubectl port-forward svc/argocd-server -n argocd 8081:443
+````
+
+Login and update admin credential
+````
+## get old password
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d; echo
+## login
+export ARGOCD_OPTS='--port-forward-namespace argocd'
+argocd login localhost:8081
+## update password
+argocd account update-password 
+
+````
+
+### Install Ingress Controller
+````
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
+````
