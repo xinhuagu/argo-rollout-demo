@@ -15,11 +15,24 @@ Tech Stack:
 ![Alt text](/img/rollout-demo-process.jpeg?raw=true "Argo Rollout DEMO")
 
 
-## Argo rollout dashboard
+# Preparing the enviroment
+## Local Kubernetes Cluster
+Using Rancher desktop or docker desktop to start a local cluster
+
+## Install Argo Rollout
+
+```
+kubectl create namespace argo-rollouts
+kubectl apply -n argo-rollouts -f https://github.com/argoproj/argo-rollouts/releases/latest/download/install.yaml
+```
+
+Open Argo rollout dashboard
 
 ```
 kubectl argo rollouts dashboard
 ```
+
+
 ## Argo Workflow server
 
 ```
