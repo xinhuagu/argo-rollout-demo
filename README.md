@@ -15,16 +15,6 @@ Tech Stack:
 ![Alt text](/img/rollout-demo-process.jpeg?raw=true "Argo Rollout DEMO")
 
 
-## Table of contents
-1. [Preparing the enviroment](#Preparing the enviroment)
-   1. [Local Kubernetes Cluster](#Local Kubernetes Cluster)
-   2. [Install metric server](#Install metric server)
-   3. [Install Argo Rollout](#Install Argo Rollout)
-   4. [Argo Workflow server](#Argo Workflow server)
-   5. [Config the App enviroment](#Config the App enviroment)
-2. [Buiding the project](#Buiding the project)
-
-
 ## Preparing the enviroment
 ### Local Kubernetes Cluster
 Using Rancher desktop or docker desktop to start a local cluster
