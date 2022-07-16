@@ -88,6 +88,12 @@ argocd login localhost:8081
 ## update password : Geheim123geheim
 argocd account update-password 
 ````
+
+Creating a new project
+![Alt text](/img/argocd-setup-1.png?raw=true "step 1")
+![Alt text](/img/argocd-setup-2.png?raw=true "step 1")
+
+
 ### Install Argo workflow
 ````
 kubectl create ns argo
