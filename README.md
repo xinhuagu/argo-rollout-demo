@@ -1,5 +1,5 @@
 # Argo-rollout-demo
-
+## Description
 This DEMO demonstrates how to use Argo Workflow , Argo CD and Argo Rollout to create a complete Microservice CI/CD workflow with different Rollout Strategies (Canary/Blue-Green) in a kubernetes Cluster. 
 
 Tech Stack:
@@ -15,11 +15,21 @@ Tech Stack:
 ![Alt text](/img/rollout-demo-process.jpeg?raw=true "Argo Rollout DEMO")
 
 
-# Preparing the enviroment
-## Local Kubernetes Cluster
+## Table of contents
+1. [Preparing the enviroment](#Preparing the enviroment)
+   1. [Local Kubernetes Cluster](#Local Kubernetes Cluster)
+   2. [Install metric server](#Install metric server)
+   3. [Install Argo Rollout](#Install Argo Rollout)
+   4. [Argo Workflow server](#Argo Workflow server)
+   5. [Config the App enviroment](#Config the App enviroment)
+2. [Buiding the project](#Buiding the project)
+
+
+## Preparing the enviroment
+### Local Kubernetes Cluster
 Using Rancher desktop or docker desktop to start a local cluster
 
-## Install metric server
+### Install metric server
 
 Download components.yaml 
 ````
@@ -41,7 +51,7 @@ Add one line "--kubelet-insecure-tls" in "- args"
 ````
 kubectl apply -f components.yaml
 ````
-## Install Argo Rollout
+### Install Argo Rollout
 
 ```
 kubectl create namespace argo-rollouts
@@ -55,7 +65,7 @@ kubectl argo rollouts dashboard
 ```
 
 
-## Argo Workflow server
+### Argo Workflow server
 
 ```
 argo server --auth-mode=server
@@ -136,7 +146,7 @@ kubectl apply -f ./development/local-persistence.yaml
 kubectl apply -f ./development/m2volume.yaml
 ````
 
-# Buiding the project
+## Buiding the project
 start the buiding process ( make sure the tag uses right version number)
 ````
 argo submit ./deployment/github.yaml -n argo -p tag=0.0.18
